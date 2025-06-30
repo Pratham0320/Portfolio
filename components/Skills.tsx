@@ -6,73 +6,87 @@ import { useRef } from "react";
 import CodePlayground from "@/components/CodePlayground";
 import MiniGames from "@/components/MiniGames";
 import SkillAssessment from "@/components/SkillAssessment";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  SiReact,
-  SiJavascript,
-  SiTypescript,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiNextdotjs,
-  SiGit,
-  SiAmazon,
-  SiDocker,
-  SiPostgresql,
-  SiHtml5,
-  SiCss3,
-} from "react-icons/si";
 
 export default function Skills() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const icons = [
-    { name: "React", icon: <SiReact size={32} color="#61DAFB" /> },
-    { name: "JavaScript", icon: <SiJavascript size={32} color="#F7DF1E" /> },
-    { name: "TypeScript", icon: <SiTypescript size={32} color="#3178C6" /> },
-    { name: "Tailwind", icon: <SiTailwindcss size={32} color="#38BDF8" /> },
-    { name: "Node.js", icon: <SiNodedotjs size={32} color="#339933" /> },
-    { name: "Next.js", icon: <SiNextdotjs size={32} color="#000000" /> },
-    { name: "Git", icon: <SiGit size={32} color="#F05032" /> },
-    { name: "AWS", icon: <SiAmazon size={32} color="#FF9900" /> },
-    { name: "Docker", icon: <SiDocker size={32} color="#2496ED" /> },
-    { name: "PostgreSQL", icon: <SiPostgresql size={32} color="#336791" /> },
-    { name: "HTML5", icon: <SiHtml5 size={32} color="#E34F26" /> },
-    { name: "CSS3", icon: <SiCss3 size={32} color="#1572B6" /> },
+
+  // ✅ Use devicon SVG links via jsdelivr
+  const topRow = [
+    {
+      name: "Java",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+    },
+    {
+      name: "React",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    },
+    {
+      name: "JavaScript",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+    },
+    {
+      name: "TypeScript",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    },
+    {
+      name: "Tailwind CSS",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    },
+    {
+      name: "C",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+    },
+    {
+      name: "IntelliJ IDEA",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg",
+    },
+    {
+      name: "VS Code",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",
+    },
+    {
+      name: "SQL",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
+    },
+    {
+      name: "AWS",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+    },
   ];
 
-  const skillCategories = [
+  const bottomRow = [
     {
-      title: "Programming Languages",
-      skills: [
-        { name: "Java", level: 90 },
-        { name: "JavaScript", level: 85 },
-        { name: "TypeScript", level: 80 },
-        { name: "Python", level: 75 },
-        { name: "C", level: 70 },
-        { name: "HTML/CSS", level: 90 },
-      ],
+      name: "Spring",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
     },
     {
-      title: "Frameworks & Libraries",
-      skills: [
-        { name: "React", level: 85 },
-        { name: "Next.js", level: 80 },
-        { name: "Tailwind CSS", level: 90 },
-        { name: "SQL", level: 75 },
-        { name: "MySQL", level: 70 },
-        { name: "AWS", level: 65 },
-      ],
+      name: "Supabase",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
     },
     {
-      title: "Tools & Technologies",
-      skills: [
-        { name: "VS Code", level: 95 },
-        { name: "Git/GitHub", level: 85 },
-        { name: "IntelliJ IDEA", level: 80 },
-        { name: "Linux", level: 70 },
-        { name: "Supabase", level: 75 },
-        { name: "Vercel", level: 80 },
-      ],
+      name: "HTML5",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+    },
+    {
+      name: "CSS3",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+    },
+    {
+      name: "Git",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+    },
+    {
+      name: "Next.js",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    },
+    {
+      name: "GitHub",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+    },
+    {
+      name: "Linux",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
     },
   ];
 
@@ -89,9 +103,7 @@ export default function Skills() {
             Skills & Technologies
           </h2>
 
-          {/* ✅ NEW: Interactive Section with 3-column layout */}
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {/* Code Playground — spans 2 columns */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -101,7 +113,6 @@ export default function Skills() {
               <CodePlayground />
             </motion.div>
 
-            {/* Right column: MiniGames & SkillAssessment stacked */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
@@ -111,6 +122,7 @@ export default function Skills() {
               <MiniGames />
             </motion.div>
           </div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -119,33 +131,60 @@ export default function Skills() {
           >
             <SkillAssessment />
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
-            <h3 className="text-4xl text-center font-bold mb-2 text-slate-800 dark:text-slate-200">
+            <h3 className="text-3xl text-center font-bold mb-4 text-slate-200">
               Tools I work with
             </h3>
-            <div className="flex flex-wrap justify-center items-center gap-6 py-12">
-              {icons.map((skill) => {
+
+            {/* Top Row */}
+            <div className="flex flex-wrap justify-center items-center gap-6 py-6">
+              {topRow.map((skill) => {
                 const rotate = useMotionValue(0);
-
                 useAnimationFrame((t) => {
-                  rotate.set((t / 1000) * 60); // Keep spinning clockwise
+                  rotate.set((t / 1000) * 60);
                 });
-
                 return (
-                  <div className="relative group w-16 h-16 rounded-full border border-slate-600 flex items-center justify-center p-3 hover:scale-110 transition">
-                    {/* Rotating icon only */}
-                    <motion.div
+                  <div
+                    key={skill.name}
+                    className="relative group w-16 h-16 rounded-full border border-slate-500 ring-1 ring-white/30 hover:ring-2 hover:ring-white/70 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] flex items-center justify-center p-3 hover:scale-110 transition"
+                  >
+                    <motion.img
+                      src={skill.src}
+                      alt={skill.name}
                       style={{ rotate }}
-                      className="flex items-center justify-center"
-                    >
-                      {skill.icon}
-                    </motion.div>
+                      className="w-8 h-8"
+                    />
+                    <span className="absolute bottom-[-2rem] text-xs opacity-0 group-hover:opacity-100 bg-black text-white px-2 py-1 rounded shadow transition">
+                      {skill.name}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
 
-                    {/* Tooltip stays fixed */}
+            {/* Bottom Row */}
+            <div className="flex flex-wrap justify-center items-center gap-6 py-6">
+              {bottomRow.map((skill) => {
+                const rotate = useMotionValue(0);
+                useAnimationFrame((t) => {
+                  rotate.set((t / 1000) * 60);
+                });
+                return (
+                  <div
+                    key={skill.name}
+                    className="relative group w-16 h-16 rounded-full border border-slate-500 ring-1 ring-white/30 hover:ring-2 hover:ring-white/70 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] flex items-center justify-center p-3 hover:scale-110 transition"
+                  >
+                    <motion.img
+                      src={skill.src}
+                      alt={skill.name}
+                      style={{ rotate }}
+                      className="w-8 h-8"
+                    />
                     <span className="absolute bottom-[-2rem] text-xs opacity-0 group-hover:opacity-100 bg-black text-white px-2 py-1 rounded shadow transition">
                       {skill.name}
                     </span>

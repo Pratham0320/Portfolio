@@ -33,7 +33,7 @@ export default function Projects() {
     {
       title: "Portfolio Website",
       description:
-        "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, animations, and real-time GitHub integration.",
+        "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, animations, real-time GitHub integration, and performance optimization.",
       technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
       features: [
         "Responsive design",
@@ -45,26 +45,26 @@ export default function Projects() {
       ],
       github: "https://github.com/Pratham0320/portfolio",
       demo: "#",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/PortFolio.png",
       color: "from-blue-500 to-purple-600",
     },
     {
-      title: "Event Management System",
+      title: "Inofinity RnD",
       description:
-        "A full-stack web application for managing campus events. Built during my tenure at Khwaab, KIIT, helping track 100+ events efficiently.",
-      technologies: ["React", "Node.js", "MongoDB", "Express"],
+        "Worked as a Junior Web Development Intern at Inofinity R&D Pvt. Ltd. Contributed to building and optimizing a production-ready medical web platform using Next.js, React, and Tailwind CSS.",
+      technologies: ["React", "Next.js", "Tailwind CSS", "Vercel", "Git"],
       features: [
-        "Event creation & management",
-        "User registration system",
-        "Real-time notifications",
-        "Analytics dashboard",
-        "Mobile responsive",
-        "Admin panel",
+        "Modular UI component design",
+        "Improved performance & accessibility by 30%",
+        "Cross-browser responsiveness",
+        "Team collaboration on frontend",
+        "Backend response optimization by 35%",
+        "Production uptime of 99.9%",
       ],
-      github: "https://github.com/Pratham0320/event-management",
-      demo: null,
-      image: "/placeholder.svg?height=200&width=400",
-      color: "from-purple-500 to-pink-600",
+      github: "https://github.com/Pratham0320/Inofinity-Medical",
+      demo: "https://inofinityrnd.com",
+      image: "/inofinity.png",
+      color: "from-blue-500 to-purple-600",
     },
   ];
 
@@ -79,6 +79,9 @@ export default function Projects() {
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Featured Projects
+            <p className="text-3xl font-semibold text-slate-600 dark:text-slate-300 mt-6">
+              I've built
+            </p>
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -91,9 +94,7 @@ export default function Projects() {
                       alt={project.title}
                       className="w-full h-48 object-cover transition-all duration-500 group-hover:scale-105"
                     />
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-20`}
-                    ></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-40" />
                   </div>
 
                   <CardHeader>
@@ -125,12 +126,17 @@ export default function Projects() {
                         Key Features
                       </h4>
                       <ul className="text-sm text-slate-600 dark:text-slate-300 space-y-1">
-                        {project.features.slice(0, 3).map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                            {feature}
-                          </li>
-                        ))}
+                        {project.features
+                          .slice(0, 3)
+                          .map((feature, featureIndex) => (
+                            <li
+                              key={featureIndex}
+                              className="flex items-center gap-2"
+                            >
+                              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                              {feature}
+                            </li>
+                          ))}
                       </ul>
                     </div>
 
@@ -141,7 +147,11 @@ export default function Projects() {
                         className="flex-1 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
                         asChild
                       >
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Github className="w-4 h-4 mr-2" />
                           Code
                         </a>
@@ -152,9 +162,13 @@ export default function Projects() {
                           className={`flex-1 bg-gradient-to-r ${project.color} text-white`}
                           asChild
                         >
-                          <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <ExternalLink className="w-4 h-4 mr-2" />
-                            Demo
+                            Live
                           </a>
                         </Button>
                       )}
