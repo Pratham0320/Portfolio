@@ -27,7 +27,7 @@ export default function ProgressBars() {
       />
 
       {/* Reading progress indicator */}
-      <div className="fixed top-20 left-4 z-40 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full p-2 shadow-lg">
+      {/* <div className="fixed top-20 left-4 z-40 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full p-2 shadow-lg">
         <div className="relative w-12 h-12">
           <svg className="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
             <path
@@ -54,7 +54,7 @@ export default function ProgressBars() {
             <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{Math.round(readingProgress)}%</span>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

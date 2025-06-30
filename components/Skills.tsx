@@ -1,16 +1,44 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import CodePlayground from "@/components/CodePlayground"
-import MiniGames from "@/components/MiniGames"
-import SkillAssessment from "@/components/SkillAssessment"
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import CodePlayground from "@/components/CodePlayground";
+import MiniGames from "@/components/MiniGames";
+import SkillAssessment from "@/components/SkillAssessment";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  SiReact,
+  SiJavascript,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiNextdotjs,
+  SiGit,
+  SiAmazon,
+  SiDocker,
+  SiPostgresql,
+  SiHtml5,
+  SiCss3,
+} from "react-icons/si";
 
 export default function Skills() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const icons = [
+    { name: "React", icon: <SiReact size={32} color="#61DAFB" /> },
+    { name: "JavaScript", icon: <SiJavascript size={32} color="#F7DF1E" /> },
+    { name: "TypeScript", icon: <SiTypescript size={32} color="#3178C6" /> },
+    { name: "Tailwind", icon: <SiTailwindcss size={32} color="#38BDF8" /> },
+    { name: "Node.js", icon: <SiNodedotjs size={32} color="#339933" /> },
+    { name: "Next.js", icon: <SiNextdotjs size={32} color="#000000" /> },
+    { name: "Git", icon: <SiGit size={32} color="#F05032" /> },
+    { name: "AWS", icon: <SiAmazon size={32} color="#FF9900" /> },
+    { name: "Docker", icon: <SiDocker size={32} color="#2496ED" /> },
+    { name: "PostgreSQL", icon: <SiPostgresql size={32} color="#336791" /> },
+    { name: "HTML5", icon: <SiHtml5 size={32} color="#E34F26" /> },
+    { name: "CSS3", icon: <SiCss3 size={32} color="#1572B6" /> },
+  ];
 
   const skillCategories = [
     {
@@ -46,7 +74,7 @@ export default function Skills() {
         { name: "Vercel", level: 80 },
       ],
     },
-  ]
+  ];
 
   return (
     <section className="py-20 px-6">
@@ -61,81 +89,73 @@ export default function Skills() {
             Skills & Technologies
           </h2>
 
-          {/* Interactive Features */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          {/* ✅ NEW: Interactive Section with 3-column layout */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {/* Code Playground — spans 2 columns */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ delay: 0.2, duration: 0.8 }}
+              className="lg:col-span-2"
             >
               <CodePlayground />
             </motion.div>
 
+            {/* Right column: MiniGames & SkillAssessment stacked */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ delay: 0.4, duration: 0.8 }}
+              className="space-y-8"
             >
-              <div className="space-y-6">
-                <MiniGames />
-                <SkillAssessment />
-              </div>
+              <MiniGames />
             </motion.div>
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="mb-12"
+          >
+            <SkillAssessment />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 1, duration: 0.8 }}
+          >
+            <h3 className="text-4xl text-center font-bold mb-2 text-slate-800 dark:text-slate-200">
+              Tools I work with
+            </h3>
+            <div className="flex flex-wrap justify-center items-center gap-6 py-12">
+              {icons.map((skill) => {
+                const rotate = useMotionValue(0);
 
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-3 gap-8 mt-8">
-            {skillCategories.map((category, categoryIndex) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ delay: categoryIndex * 0.2, duration: 0.8 }}
-              >
-                <Card className="h-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-bold text-slate-800 dark:text-white text-center">
-                      {category.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{
-                          delay: categoryIndex * 0.2 + skillIndex * 0.1,
-                          duration: 0.6,
-                        }}
-                        className="space-y-2"
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="font-medium text-slate-700 dark:text-slate-300">{skill.name}</span>
-                          <span className="text-sm text-slate-500 dark:text-slate-400">{skill.level}%</span>
-                        </div>
-                        <div className="relative">
-                          <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full" />
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                            transition={{
-                              delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.3,
-                              duration: 1,
-                              ease: "easeOut",
-                            }}
-                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                          />
-                        </div>
-                      </motion.div>
-                    ))}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                useAnimationFrame((t) => {
+                  rotate.set((t / 1000) * 60); // Keep spinning clockwise
+                });
+
+                return (
+                  <div className="relative group w-16 h-16 rounded-full border border-slate-600 flex items-center justify-center p-3 hover:scale-110 transition">
+                    {/* Rotating icon only */}
+                    <motion.div
+                      style={{ rotate }}
+                      className="flex items-center justify-center"
+                    >
+                      {skill.icon}
+                    </motion.div>
+
+                    {/* Tooltip stays fixed */}
+                    <span className="absolute bottom-[-2rem] text-xs opacity-0 group-hover:opacity-100 bg-black text-white px-2 py-1 rounded shadow transition">
+                      {skill.name}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

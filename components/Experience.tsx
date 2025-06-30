@@ -1,14 +1,22 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Calendar, MapPin, TrendingUp } from "lucide-react"
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Calendar, MapPin, TrendingUp } from "lucide-react";
 
 export default function Experience() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // ✅ New timeline line scroll animation
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const experiences = [
     {
@@ -50,7 +58,7 @@ export default function Experience() {
       ],
       color: "from-green-500 to-emerald-500",
     },
-  ]
+  ];
 
   return (
     <section className="py-20 px-6 bg-slate-50/50 dark:bg-slate-800/20">
@@ -65,16 +73,21 @@ export default function Experience() {
             Experience
           </h2>
 
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-600"></div>
+          <div ref={timelineRef} className="relative">
+            {/* ✅ Scroll-linked growing timeline line */}
+            <motion.div
+              className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-cyan-400 via-purple-500 to-blue-600 rounded-full shadow-[0_0_20px_rgba(56,189,248,0.8),0_0_40px_rgba(139,92,246,0.6)]"
+              style={{ height: lineHeight }}
+            />
 
             <div className="space-y-12">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -50 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+                  animate={
+                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
+                  }
                   transition={{ delay: index * 0.2, duration: 0.8 }}
                   className="relative"
                 >
@@ -82,7 +95,11 @@ export default function Experience() {
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{ delay: index * 0.2 + 0.3, type: "spring", stiffness: 200 }}
+                    transition={{
+                      delay: index * 0.2 + 0.3,
+                      type: "spring",
+                      stiffness: 200,
+                    }}
                     className={`absolute left-6 w-4 h-4 bg-gradient-to-r ${exp.color} rounded-full border-4 border-white dark:border-slate-900 z-10`}
                   ></motion.div>
 
@@ -91,7 +108,9 @@ export default function Experience() {
                       <CardContent className="p-6">
                         <div className="space-y-4">
                           <div>
-                            <h3 className="text-xl font-bold text-slate-800 dark:text-white">{exp.title}</h3>
+                            <h3 className="text-xl font-bold text-slate-800 dark:text-white">
+                              {exp.title}
+                            </h3>
                             <p
                               className={`text-lg font-semibold bg-gradient-to-r ${exp.color} bg-clip-text text-transparent`}
                             >
@@ -115,12 +134,21 @@ export default function Experience() {
                               <motion.div
                                 key={achIndex}
                                 initial={{ opacity: 0, y: 10 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                                transition={{ delay: index * 0.2 + achIndex * 0.1 + 0.5, duration: 0.5 }}
+                                animate={
+                                  isInView
+                                    ? { opacity: 1, y: 0 }
+                                    : { opacity: 0, y: 10 }
+                                }
+                                transition={{
+                                  delay: index * 0.2 + achIndex * 0.1 + 0.5,
+                                  duration: 0.5,
+                                }}
                                 className="flex items-start gap-2"
                               >
                                 <TrendingUp className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-slate-600 dark:text-slate-300">{achievement}</span>
+                                <span className="text-slate-600 dark:text-slate-300">
+                                  {achievement}
+                                </span>
                               </motion.div>
                             ))}
                           </div>
@@ -135,5 +163,5 @@ export default function Experience() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

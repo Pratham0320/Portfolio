@@ -1,58 +1,72 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import React from 'react';
+import { motion } from 'framer-motion';
 
-interface LoadingSkeletonProps {
-  className?: string
-  variant?: "text" | "card" | "avatar" | "button"
-  lines?: number
-}
+const LoadingSkeleton = () => {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+      <div className="text-center">
+        {/* Loading animation */}
+        <motion.div
+          className="w-24 h-24 mx-auto mb-8 relative"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="absolute inset-0 border-4 border-purple-500/30 rounded-full" />
+          <div className="absolute inset-0 border-4 border-transparent border-t-purple-500 rounded-full" />
+        </motion.div>
 
-export default function LoadingSkeleton({ className = "", variant = "text", lines = 1 }: LoadingSkeletonProps) {
-  const shimmer = {
-    animate: {
-      backgroundPosition: ["200% 0", "-200% 0"],
-    },
-    transition: {
-      duration: 2,
-      repeat: Number.POSITIVE_INFINITY,
-      ease: "linear",
-    },
-  }
+        {/* Loading text */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-2xl font-bold text-white mb-4"
+        >
+          Loading Portfolio
+        </motion.h2>
 
-  const baseClasses =
-    "bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 bg-[length:200%_100%] rounded"
+        {/* Progress dots */}
+        <div className="flex justify-center space-x-2">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-3 h-3 bg-purple-500 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </div>
 
-  if (variant === "text") {
-    return (
-      <div className={`space-y-2 ${className}`}>
-        {Array.from({ length: lines }).map((_, i) => (
-          <motion.div key={i} className={`h-4 ${baseClasses} ${i === lines - 1 ? "w-3/4" : "w-full"}`} {...shimmer} />
-        ))}
-      </div>
-    )
-  }
-
-  if (variant === "card") {
-    return (
-      <div className={`space-y-4 ${className}`}>
-        <motion.div className={`h-48 ${baseClasses}`} {...shimmer} />
-        <div className="space-y-2">
-          <motion.div className={`h-6 ${baseClasses}`} {...shimmer} />
-          <motion.div className={`h-4 ${baseClasses} w-3/4`} {...shimmer} />
-          <motion.div className={`h-4 ${baseClasses} w-1/2`} {...shimmer} />
+        {/* Skeleton cards */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
+            >
+              <div className="animate-pulse">
+                <div className="h-4 bg-white/20 rounded mb-4" />
+                <div className="h-3 bg-white/15 rounded mb-2" />
+                <div className="h-3 bg-white/15 rounded w-2/3" />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    )
-  }
+    </div>
+  );
+};
 
-  if (variant === "avatar") {
-    return <motion.div className={`w-12 h-12 rounded-full ${baseClasses} ${className}`} {...shimmer} />
-  }
-
-  if (variant === "button") {
-    return <motion.div className={`h-10 w-24 ${baseClasses} ${className}`} {...shimmer} />
-  }
-
-  return <motion.div className={`h-4 ${baseClasses} ${className}`} {...shimmer} />
-}
+export default LoadingSkeleton;

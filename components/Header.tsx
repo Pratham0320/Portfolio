@@ -1,15 +1,22 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ChevronDown, Mail, Phone, Linkedin, Github, Download } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import TypingAnimation from "@/components/TypingAnimation"
-import ParticleBackground from "@/components/ParticleBackground"
+import { motion } from "framer-motion";
+import {
+  ChevronDown,
+  Mail,
+  Phone,
+  Linkedin,
+  Github,
+  Download,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import TypingAnimation from "@/components/TypingAnimation";
+import ParticleBackground from "@/components/ParticleBackground";
 
 export default function Header() {
   const scrollToNext = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
-  }
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -22,8 +29,12 @@ export default function Header() {
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             initial={{
-              x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1200),
-              y: Math.random() * (typeof window !== "undefined" ? window.innerHeight : 800),
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1200),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 800),
             }}
             animate={{
               y: [null, -100, null],
@@ -55,9 +66,10 @@ export default function Header() {
             className="mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-white dark:border-slate-700 shadow-2xl"
           >
             <img
-              src="/placeholder.svg?height=192&width=192"
+              src="/Profile_Photo.jpg"
               alt="Pratham Shandilya"
               className="w-full h-full object-cover"
+              style={{ objectPosition: "center 10%" }} // Moves image focus upward, showing more hair
             />
           </motion.div>
 
@@ -95,7 +107,8 @@ export default function Header() {
               transition={{ delay: 0.8 }}
               className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto"
             >
-              Passionate about software development, problem-solving, and creating innovative solutions
+              Passionate about software development, problem-solving, and
+              creating innovative solutions
             </motion.p>
           </div>
 
@@ -106,21 +119,36 @@ export default function Header() {
             transition={{ delay: 1 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            <Button variant="outline" className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm" asChild>
-              <a href="mailto:prathamshandilya2207@gmail.com" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
+              asChild
+            >
+              <a
+                href="mailto:prathamshandilya2207@gmail.com"
+                className="flex items-center gap-2"
+              >
                 <Mail className="w-4 h-4" />
                 Email
               </a>
             </Button>
-            <Button variant="outline" className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm" asChild>
+            <Button
+              variant="outline"
+              className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
+              asChild
+            >
               <a href="tel:+917084918772" className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 Phone
               </a>
             </Button>
-            <Button variant="outline" className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm" asChild>
+            <Button
+              variant="outline"
+              className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
+              asChild
+            >
               <a
-                href="https://linkedin.com/in/Pratham"
+                href="https://linkedin.com/in/Pratham0320"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
@@ -129,7 +157,11 @@ export default function Header() {
                 LinkedIn
               </a>
             </Button>
-            <Button variant="outline" className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm" asChild>
+            <Button
+              variant="outline"
+              className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
+              asChild
+            >
               <a
                 href="https://github.com/Pratham0320"
                 target="_blank"
@@ -140,8 +172,16 @@ export default function Header() {
                 GitHub
               </a>
             </Button>
-            <Button variant="outline" className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm" asChild>
-              <a href="/resume.pdf" download="Pratham_Shandilya_Resume.pdf" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
+              asChild
+            >
+              <a
+                href="/Pratham_Shandilya_Resume.pdf"
+                download="Pratham_Shandilya_Resume.pdf"
+                className="flex items-center gap-2"
+              >
                 <Download className="w-4 h-4" />
                 Resume
               </a>
@@ -160,12 +200,16 @@ export default function Header() {
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, ease: "easeInOut" }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 2,
+            ease: "easeInOut",
+          }}
           className="flex flex-col items-center"
         >
           <ChevronDown className="w-6 h-6" />
         </motion.div>
       </motion.button>
     </div>
-  )
+  );
 }

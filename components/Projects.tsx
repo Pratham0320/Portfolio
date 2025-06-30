@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Github, ExternalLink, Code, Zap } from "lucide-react"
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Github, ExternalLink, Code, Zap } from "lucide-react";
 
 export default function Projects() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const projects = [
     {
@@ -66,7 +66,7 @@ export default function Projects() {
       image: "/placeholder.svg?height=200&width=400",
       color: "from-purple-500 to-pink-600",
     },
-  ]
+  ];
 
   return (
     <section className="py-20 px-6">
@@ -83,38 +83,17 @@ export default function Projects() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ delay: index * 0.2, duration: 0.8 }}
-                className="group perspective-1000"
-                data-project-card
-              >
-                <Card className="h-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-y-12 transform-gpu">
-                  <div className="relative overflow-hidden rounded-t-lg group-hover:rounded-lg transition-all duration-300">
+              <TiltCard key={index}>
+                <Card className="h-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all duration-500">
+                  <div className="relative overflow-hidden rounded-t-lg">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-48 object-cover transition-all duration-500 group-hover:scale-125 group-hover:rotate-2"
+                      className="w-full h-48 object-cover transition-all duration-500 group-hover:scale-105"
                     />
                     <div
-                      className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-20 group-hover:opacity-40 transition-all duration-300`}
+                      className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-20`}
                     ></div>
-
-                    {/* Enhanced overlay with 3D effect */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <motion.div
-                        initial={{ scale: 0, rotateY: 180 }}
-                        whileHover={{ scale: 1, rotateY: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Button size="sm" className="bg-white text-black hover:bg-gray-100" data-magnetic>
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Preview
-                        </Button>
-                      </motion.div>
-                    </div>
                   </div>
 
                   <CardHeader>
@@ -125,7 +104,9 @@ export default function Projects() {
                   </CardHeader>
 
                   <CardContent className="space-y-4">
-                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{project.description}</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                      {project.description}
+                    </p>
 
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, techIndex) => (
@@ -157,7 +138,6 @@ export default function Projects() {
                       <Button
                         variant="outline"
                         size="sm"
-                        data-magnetic
                         className="flex-1 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
                         asChild
                       >
@@ -169,7 +149,6 @@ export default function Projects() {
                       {project.demo && (
                         <Button
                           size="sm"
-                          data-magnetic
                           className={`flex-1 bg-gradient-to-r ${project.color} text-white`}
                           asChild
                         >
@@ -182,11 +161,52 @@ export default function Projects() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </TiltCard>
             ))}
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
+}
+
+// ✅ Reusable tilt wrapper
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    setRotate({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 });
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+        transition: "transform 0.1s ease",
+      }}
+      className="relative"
+    >
+      {children}
+    </motion.div>
+  );
 }
