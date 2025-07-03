@@ -13,24 +13,6 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "Expense Tracker",
-      description:
-        "A comprehensive personal finance management application built with Java & JavaFX. Features expense categorization, budget tracking, and detailed analytics with CSV export functionality.",
-      technologies: ["Java", "JavaFX", "CSV", "File I/O"],
-      features: [
-        "Personal expense tracking",
-        "Category-wise organization",
-        "Budget management",
-        "CSV export functionality",
-        "Data visualization",
-        "Monthly/yearly reports",
-      ],
-      github: "https://github.com/Pratham0320/ExpenseTracker",
-      demo: null,
-      image: "/placeholder.svg?height=200&width=400",
-      color: "from-green-500 to-emerald-600",
-    },
-    {
       title: "Portfolio Website",
       description:
         "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, animations, real-time GitHub integration, and performance optimization.",
@@ -45,7 +27,7 @@ export default function Projects() {
       ],
       github: "https://github.com/Pratham0320/portfolio",
       demo: "#",
-      image: "/PortFolio.png",
+      image: "/PortFolio.webp",
       color: "from-blue-500 to-purple-600",
     },
     {
@@ -63,8 +45,26 @@ export default function Projects() {
       ],
       github: "https://github.com/Pratham0320/Inofinity-Medical",
       demo: "https://inofinityrnd.com",
-      image: "/inofinity.png",
+      image: "/inofinity.webp",
       color: "from-blue-500 to-purple-600",
+    },
+    {
+      title: "Expense Tracker",
+      description:
+        "A comprehensive personal finance management application built with Java & JavaFX. Features expense categorization, budget tracking, and detailed analytics with CSV export functionality.",
+      technologies: ["Java", "JavaFX", "CSV", "File I/O"],
+      features: [
+        "Personal expense tracking",
+        "Category-wise organization",
+        "Budget management",
+        "CSV export functionality",
+        "Data visualization",
+        "Monthly/yearly reports",
+      ],
+      github: "https://github.com/Pratham0320/ExpenseTracker",
+      demo: null,
+      image: "/placeholder.svg?height=200&width=400",
+      color: "from-green-500 to-emerald-600",
     },
   ];
 
