@@ -19,7 +19,6 @@ export default function Projects() {
       technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
       features: [
         "Responsive design",
-        "Dark/Light theme",
         "Smooth animations",
         "GitHub API integration",
         "Contact form",
@@ -27,7 +26,7 @@ export default function Projects() {
       ],
       github: "https://github.com/Pratham0320/portfolio",
       demo: "#",
-      image: "/PortFolio.webp",
+      image: "/PortFolio.png",
       color: "from-blue-500 to-purple-600",
     },
     {
