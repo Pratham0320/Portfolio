@@ -7,7 +7,7 @@ import {
   Phone,
   Linkedin,
   Github,
-  Download,
+  Link,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TypingAnimation from "@/components/TypingAnimation";
@@ -66,7 +66,7 @@ export default function Header() {
             className="mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-white dark:border-slate-700 shadow-2xl"
           >
             <img
-              src="/Profile_Photo.jpg"
+              src="/Profile_Photo.webp"
               alt="Pratham Shandilya"
               className="w-full h-full object-cover"
               style={{ objectPosition: "center 10%" }} // Moves image focus upward, showing more hair
@@ -178,11 +178,12 @@ export default function Header() {
               asChild
             >
               <a
-                href="/Pratham_Shandilya_Resume.pdf"
-                download="Pratham_Shandilya_Resume.pdf"
+                href="https://drive.google.com/file/d/1R_HSw0-S5nG0TrwXbtICRcW684SfxXb9/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                <Download className="w-4 h-4" />
+                <Link className="w-4 h-4" />
                 Resume
               </a>
             </Button>
