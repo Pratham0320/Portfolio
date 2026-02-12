@@ -68,7 +68,7 @@ export default function Education() {
                           <Award className="w-5 h-5 text-green-600 dark:text-green-400" />
                           <span className="font-semibold text-green-800 dark:text-green-300">Current CGPA</span>
                         </div>
-                        <p className="text-2xl font-bold text-green-700 dark:text-green-400">8.50</p>
+                        <p className="text-2xl font-bold text-green-700 dark:text-green-400">8.60</p>
                       </motion.div>
 
                       <motion.div
@@ -81,7 +81,7 @@ export default function Education() {
                           <Award className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                           <span className="font-semibold text-blue-800 dark:text-blue-300">Highest SGPA</span>
                         </div>
-                        <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">8.88</p>
+                        <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">9.80</p>
                       </motion.div>
                     </div>
 
