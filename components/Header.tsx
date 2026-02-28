@@ -66,7 +66,7 @@ export default function Header() {
             className="mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-white dark:border-slate-700 shadow-2xl"
           >
             <img
-              src="/Profile_Photo.webp"
+              src="/Gemini_Generated_Image_egrajegrajegraje.png"
               alt="Pratham Shandilya"
               className="w-full h-full object-cover"
               style={{ objectPosition: "center 10%" }} // Moves image focus upward, showing more hair
